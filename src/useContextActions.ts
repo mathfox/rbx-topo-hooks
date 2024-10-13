@@ -1,10 +1,7 @@
-import { useHookState } from "@rbxts/jecs-topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 import { ContextActionService, HttpService } from "@rbxts/services";
 
-export type ContextActionInput =
-	| Enum.UserInputType
-	| Enum.KeyCode
-	| Enum.PlayerActions;
+export type ContextActionInput = Enum.UserInputType | Enum.KeyCode | Enum.PlayerActions;
 
 export type ContextActionCallback = (
 	inputState: Enum.UserInputState,
@@ -33,11 +30,7 @@ function cleanup(storage: Storage): void {
 
 export function useContextAction(
 	callback: ContextActionCallback,
-	{
-		inputTypes,
-		actionName,
-		priority = Enum.ContextActionPriority.Medium.Value,
-	}: ContextActionOptions,
+	{ inputTypes, actionName, priority = Enum.ContextActionPriority.Medium.Value }: ContextActionOptions,
 	discriminator?: unknown,
 ): void {
 	const storage = useHookState(actionName || discriminator, cleanup) as Storage;
@@ -54,8 +47,7 @@ export function useContextAction(
 
 		ContextActionService.BindActionAtPriority(
 			resultActionName,
-			(name, inputState, inputObject) =>
-				value.callback(inputState, inputObject, name),
+			(name, inputState, inputObject) => value.callback(inputState, inputObject, name),
 			false,
 			priority,
 			...inputTypes,

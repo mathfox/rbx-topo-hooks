@@ -1,4 +1,4 @@
-import { useHookState } from "@rbxts/jecs-topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 import deepEquals from "@rbxts/phantom/src/Array/deepEquals";
 
 interface Storage<TValue> {

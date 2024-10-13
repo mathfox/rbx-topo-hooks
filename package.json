@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/topo-hooks",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Hooks for topo-runtime",
 	"main": "out/init.luau",
 	"types": "out/index.d.ts",
@@ -13,7 +13,7 @@
 		"type": "git",
 		"url": "git+https://github.com/mathfox/rbx-topo-hooks.git"
 	},
-	"keywords": ["roblox", "roblox-ts", "jecs", "hooks"],
+	"keywords": ["roblox", "roblox-ts", "topo", "hooks"],
 	"author": {
 		"name": "Ivan Leontev",
 		"url": "https://github.com/mathfox"
