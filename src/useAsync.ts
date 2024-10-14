@@ -41,6 +41,7 @@ export function useAsync(
 		const promise = callback();
 
 		storage.promise = promise;
+		storage.status = "Started";
 
 		promise.then(
 			(value) => {

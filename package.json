@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/topo-hooks",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Hooks for topo-runtime",
 	"main": "out/init.luau",
 	"types": "out/index.d.ts",
