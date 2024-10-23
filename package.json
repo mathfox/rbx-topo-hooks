@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/topo-hooks",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"description": "Hooks for topo-runtime",
 	"main": "out/init.luau",
 	"types": "out/index.d.ts",
@@ -28,14 +28,14 @@
 	},
 	"devDependencies": {
 		"@rbxts/compiler-types": "^3.0.0-types.0",
-		"@rbxts/types": "^1.0.805",
+		"@rbxts/types": "^1.0.813",
 		"@rbxts/jest": "^0.1.0",
 		"@rbxts/jest-globals": "^0.1.0",
 		"roblox-ts": "^3.0.0-dev-834585a"
 	},
 	"dependencies": {
-		"@rbxts/topo-runtime": "^0.0.1",
-		"@rbxts/phantom": "^0.6.1",
-		"@rbxts/services": "^1.5.5"
+		"@rbxts/phantom": "^0.7.0",
+		"@rbxts/services": "^1.5.5",
+		"@rbxts/topo-runtime": "^0.1.0"
 	}
 }
