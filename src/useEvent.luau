@@ -226,11 +226,11 @@ end
 	@param instance Instance | { [string]: CustomEvent } | CustomEvent -- The instance or the custom event, or a table that has the event you want to connect to
 	@param event string | RBXScriptSignal | CustomEvent -- The name of, or the actual event that you want to connect to
 ]=]
-local function useEvent(instance: any, event: any): () -> (number, ...any)
+local function useEvent(key: string, instance: any, event: any): () -> (number, ...any)
 	--assert(instance ~= nil, "Instance is nil")
 	--assert(event ~= nil, "Event is nil")
 
-	local storage = useHookState("useEvent", instance, useEventCleanupCallback) :: UseEventStorage
+	local storage = useHookState(`useEvent{key}`, instance, useEventCleanupCallback) :: UseEventStorage
 
 	if storage.event ~= event then
 		if storage.event then

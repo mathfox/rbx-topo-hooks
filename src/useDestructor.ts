@@ -21,7 +21,7 @@ export function useDestructor(
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): void {
-	const storage = useHookState(discriminator, cleanup) as Storage;
+	const storage = useHookState("useDestructor", discriminator, cleanup) as Storage;
 
 	if (!storage.dtor || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);
