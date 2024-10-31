@@ -1,4 +1,4 @@
-import { useHookState } from "@rbxts/topo-runtime";
+import { getKey, useHookState } from "@rbxts/topo-runtime";
 
 type SetValue<TValue> = (newValue: TValue | ((currentValue: TValue) => TValue)) => void;
 
@@ -9,11 +9,19 @@ interface Storage<TValue> {
 
 export type UseStateReturn<TValue> = LuaTuple<[value: TValue, setValue: SetValue<TValue>]>;
 
-export function useState<TValue>(key: unknown, getDefaultValue: () => TValue, discriminator?: unknown): UseStateReturn<TValue>;
+export function useState<TValue>(
+    getDefaultValue: () => TValue,
+    discriminator?: unknown,
+    key?: unknown,
+): UseStateReturn<TValue>;
 
-export function useState<TValue>(key: unknown, defaultValue: TValue, discriminator?: unknown): UseStateReturn<TValue>;
+export function useState<TValue>(
+    defaultValue: TValue,
+    discriminator?: unknown,
+    key?: unknown,
+): UseStateReturn<TValue>;
 
-export function useState<TValue>(key: unknown, value: TValue | (() => TValue), discriminator?: unknown) {
+export function useState<TValue>(value: TValue | (() => TValue), discriminator?: unknown, key: unknown = getKey()) {
 	const storage = useHookState(key, discriminator) as Storage<TValue>;
 
 	if (!storage.setValue) {

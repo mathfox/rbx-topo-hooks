@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/topo-hooks",
-	"version": "0.3.3",
+	"version": "0.4.0",
 	"description": "Hooks for topo-runtime",
 	"main": "out/init.luau",
 	"types": "out/index.d.ts",
@@ -32,6 +32,6 @@
 		"roblox-ts": "^3.0.0-dev-834585a"
 	},
 	"dependencies": {
-		"@rbxts/topo-runtime": "^0.3.0"
+		"@rbxts/topo-runtime": "^0.4.2"
 	}
 }

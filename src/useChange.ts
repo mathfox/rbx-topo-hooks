@@ -1,11 +1,15 @@
-import { useHookState } from "@rbxts/topo-runtime";
+import { getKey, useHookState } from "@rbxts/topo-runtime";
 import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage {
 	dependencies?: ReadonlyArray<unknown>;
 }
 
-export function useChange(key: unknown, dependencies: ReadonlyArray<unknown>, discriminator?: unknown): boolean {
+export function useChange(
+    dependencies: ReadonlyArray<unknown>,
+    discriminator?: unknown,
+    key: unknown = getKey(),
+): boolean {
 	const storage = useHookState(key, discriminator) as Storage;
 
 	const previous = storage.dependencies;

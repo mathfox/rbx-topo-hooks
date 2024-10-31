@@ -1,11 +1,11 @@
-import { useHookState } from "@rbxts/topo-runtime";
+import { getKey, useHookState } from "@rbxts/topo-runtime";
 
 interface Storage {
 	time?: number;
 	expiry?: number;
 }
 
-export function useTimeout(key: unknown, seconds: number, discriminator?: unknown): boolean {
+export function useTimeout(seconds: number, discriminator?: unknown, key: unknown = getKey()): boolean {
 	const storage = useHookState(key, discriminator) as Storage;
 
 	const now = os.clock();
