@@ -1,5 +1,5 @@
 import { useHookState } from "@rbxts/topo-runtime";
-import deepEquals from "@rbxts/phantom/src/Array/deepEquals";
+import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage<TValue> {
 	dependencies: ReadonlyArray<unknown>;
@@ -33,7 +33,7 @@ export function useAsync(
 ) {
 	const storage = useHookState(discriminator, cleanup) as Storage<unknown>;
 
-	if (!deepEquals(dependencies, storage.dependencies)) {
+	if (!structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);
 
 		storage.dependencies = dependencies;

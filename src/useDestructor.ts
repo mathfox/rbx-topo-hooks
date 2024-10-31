@@ -1,5 +1,5 @@
 import { useHookState } from "@rbxts/topo-runtime";
-import deepEquals from "@rbxts/phantom/src/Array/deepEquals";
+import structuredDeepEquals from "./structuredDeepEquals";
 
 type Dtor = Callback;
 type DtorCallback = () => Dtor | undefined;
@@ -23,7 +23,7 @@ export function useDestructor(
 ): void {
 	const storage = useHookState(discriminator, cleanup) as Storage;
 
-	if (!storage.dtor || !deepEquals(dependencies, storage.dependencies)) {
+	if (!storage.dtor || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);
 
 		storage.dependencies = dependencies;

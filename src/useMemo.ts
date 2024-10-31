@@ -1,5 +1,5 @@
 import { useHookState } from "@rbxts/topo-runtime";
-import deepEquals from "@rbxts/phantom/src/Array/deepEquals";
+import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage<TValue> {
 	dependencies?: ReadonlyArray<unknown>;
@@ -21,7 +21,7 @@ export function useMemo<TValues extends Array<unknown>>(
 export function useMemo(callback: Callback, dependencies: ReadonlyArray<unknown>, discriminator?: unknown) {
 	const storage = useHookState(discriminator) as Storage<unknown>;
 
-	if (storage.value === undefined || !deepEquals(dependencies, storage.dependencies)) {
+	if (storage.value === undefined || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		storage.dependencies = dependencies;
 		storage.value = [callback()];
 	}
