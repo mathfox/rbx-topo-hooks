@@ -12,7 +12,11 @@ function cleanup(storage: Storage<unknown>) {
 	storage.promise?.cancel();
 }
 
+/**
+ * The type of `value` will be `undefined` in case if the promise has not been resolved.
+ */
 export function useAsync<TValue>(
+    key: unknown,
 	callback: () => Promise<TValue>,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
@@ -21,17 +25,8 @@ export function useAsync<TValue>(
 	| [status: PromiseConstructor["Status"]["Resolved"], value: TValue]
 	| [status: PromiseConstructor["Status"]["Rejected"], errorValue: unknown]
 	| [status: PromiseConstructor["Status"]["Cancelled"], undefined]
->;
-
-/**
- * The type of `value` will be `undefined` in case if the promise has not been resolved.
- */
-export function useAsync(
-	callback: () => Promise<unknown>,
-	dependencies: ReadonlyArray<unknown>,
-	discriminator?: unknown,
-) {
-	const storage = useHookState("useAsync", discriminator, cleanup) as Storage<unknown>;
+> {
+	const storage = useHookState(key, discriminator, cleanup) as Storage<unknown>;
 
 	if (!structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);
@@ -57,5 +52,5 @@ export function useAsync(
 		});
 	}
 
-	return $tuple(storage.status, storage.settleValue);
+	return $tuple(storage.status, storage.settleValue as any);
 }

@@ -7,19 +7,21 @@ interface Storage<TValue> {
 }
 
 export function useMemo<TValue>(
+    key: unknown,
 	callback: () => TValue,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): TValue;
 
 export function useMemo<TValues extends Array<unknown>>(
+    key: unknown,
 	callback: () => LuaTuple<TValues>,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): LuaTuple<TValues>;
 
-export function useMemo(callback: Callback, dependencies: ReadonlyArray<unknown>, discriminator?: unknown) {
-	const storage = useHookState("useMemo", discriminator) as Storage<unknown>;
+export function useMemo(key: unknown, callback: Callback, dependencies: ReadonlyArray<unknown>, discriminator?: unknown) {
+	const storage = useHookState(key, discriminator) as Storage<unknown>;
 
 	if (storage.value === undefined || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		storage.dependencies = dependencies;

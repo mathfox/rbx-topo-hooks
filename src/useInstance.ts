@@ -15,11 +15,12 @@ function cleanup(storage: Storage): void {
  * or whenever the `dependencies` change.
  */
 export function useInstance<TInstance extends Instance>(
+    key: unknown,
 	creator: () => TInstance,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): TInstance {
-	const storage = useHookState("useInstance", discriminator, cleanup) as Storage;
+	const storage = useHookState(key, discriminator, cleanup) as Storage;
 
 	if (!storage.instance || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);

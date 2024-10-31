@@ -9,12 +9,12 @@ interface Storage<TValue> {
 
 export type UseStateReturn<TValue> = LuaTuple<[value: TValue, setValue: SetValue<TValue>]>;
 
-export function useState<TValue>(getDefaultValue: () => TValue, discriminator?: unknown): UseStateReturn<TValue>;
+export function useState<TValue>(key: unknown, getDefaultValue: () => TValue, discriminator?: unknown): UseStateReturn<TValue>;
 
-export function useState<TValue>(defaultValue: TValue, discriminator?: unknown): UseStateReturn<TValue>;
+export function useState<TValue>(key: unknown, defaultValue: TValue, discriminator?: unknown): UseStateReturn<TValue>;
 
-export function useState<TValue>(value: TValue | (() => TValue), discriminator?: unknown) {
-	const storage = useHookState("useState", discriminator) as Storage<TValue>;
+export function useState<TValue>(key: unknown, value: TValue | (() => TValue), discriminator?: unknown) {
+	const storage = useHookState(key, discriminator) as Storage<TValue>;
 
 	if (!storage.setValue) {
 		storage.value = typeIs(value, "function") ? value() : value;

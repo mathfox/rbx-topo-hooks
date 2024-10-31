@@ -5,8 +5,8 @@ interface Storage {
 	expiry?: number;
 }
 
-export function useInterval(seconds: number, discriminator?: unknown): boolean {
-	const storage = useHookState("useInterval", discriminator) as Storage;
+export function useInterval(key: unknown, seconds: number, discriminator?: unknown): boolean {
+	const storage = useHookState(key, discriminator) as Storage;
 
 	const now = os.clock();
 

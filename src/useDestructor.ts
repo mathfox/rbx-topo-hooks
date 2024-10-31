@@ -17,11 +17,12 @@ function cleanup(storage: Storage): void {
  * Whenever the `dependencies` change the destructor is called.
  */
 export function useDestructor(
+    key: unknown,
 	callback: DtorCallback,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): void {
-	const storage = useHookState("useDestructor", discriminator, cleanup) as Storage;
+	const storage = useHookState(key, discriminator, cleanup) as Storage;
 
 	if (!storage.dtor || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);
