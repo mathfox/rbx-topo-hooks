@@ -1,3 +1,3 @@
-declare function useThrottle(key: unknown, seconds: number, discriminator?: unknown): boolean;
+declare function useThrottle(seconds: number, discriminator?: unknown, key?: unknown): boolean;
 
 export = useThrottle;
