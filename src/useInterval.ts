@@ -6,7 +6,7 @@ interface Storage {
 }
 
 export function useInterval(seconds: number, discriminator?: unknown): boolean {
-	const storage = useHookState(discriminator) as Storage;
+	const storage = useHookState("useInterval", discriminator) as Storage;
 
 	const now = os.clock();
 

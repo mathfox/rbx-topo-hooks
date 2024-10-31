@@ -19,7 +19,7 @@ export function useInstance<TInstance extends Instance>(
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ): TInstance {
-	const storage = useHookState(discriminator, cleanup) as Storage;
+	const storage = useHookState("useInstance", discriminator, cleanup) as Storage;
 
 	if (!storage.instance || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);

@@ -40,7 +40,7 @@ end
 	@return boolean -- returns true every x seconds, otherwise false
 ]=]
 local function useThrottle(seconds, discriminator)
-	local storage = useHookState(discriminator, useThrottleCleanupCallback)
+	local storage = useHookState("useThrottle", discriminator, useThrottleCleanupCallback)
 
 	if storage.time == nil or os.clock() - storage.time >= seconds then
 		storage.time = os.clock()

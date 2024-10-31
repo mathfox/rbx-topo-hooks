@@ -31,7 +31,7 @@ export function useAsync(
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
 ) {
-	const storage = useHookState(discriminator, cleanup) as Storage<unknown>;
+	const storage = useHookState("useAsync", discriminator, cleanup) as Storage<unknown>;
 
 	if (!structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);

@@ -14,7 +14,7 @@ export function useState<TValue>(getDefaultValue: () => TValue, discriminator?: 
 export function useState<TValue>(defaultValue: TValue, discriminator?: unknown): UseStateReturn<TValue>;
 
 export function useState<TValue>(value: TValue | (() => TValue), discriminator?: unknown) {
-	const storage = useHookState(discriminator) as Storage<TValue>;
+	const storage = useHookState("useState", discriminator) as Storage<TValue>;
 
 	if (!storage.setValue) {
 		storage.value = typeIs(value, "function") ? value() : value;

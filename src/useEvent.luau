@@ -230,7 +230,7 @@ local function useEvent(instance: any, event: any): () -> (number, ...any)
 	--assert(instance ~= nil, "Instance is nil")
 	--assert(event ~= nil, "Event is nil")
 
-	local storage = useHookState(instance, useEventCleanupCallback) :: UseEventStorage
+	local storage = useHookState("useEvent", instance, useEventCleanupCallback) :: UseEventStorage
 
 	if storage.event ~= event then
 		if storage.event then
