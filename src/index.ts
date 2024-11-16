@@ -3,6 +3,7 @@ import useThrottle from "./useThrottle";
 
 export * from "./useAsync";
 export * from "./useChange";
+export * from "./useCleanup";
 export * from "./useDestructor";
 export { useEvent };
 export * from "./useInstance";
