@@ -1,4 +1,4 @@
-import { getKey, useHookState } from "@rbxts/topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 
 type SetValue<TValue> = (newValue: TValue | ((currentValue: TValue) => TValue)) => void;
 
@@ -21,8 +21,8 @@ export function useState<TValue>(
     key?: unknown,
 ): UseStateReturn<TValue>;
 
-export function useState<TValue>(value: TValue | (() => TValue), discriminator?: unknown, key: unknown = getKey()) {
-	const storage = useHookState(key, discriminator) as Storage<TValue>;
+export function useState<TValue>(value: TValue | (() => TValue), discriminator?: unknown) {
+	const storage = useHookState(discriminator) as Storage<TValue>;
 
 	if (!storage.setValue) {
 		storage.value = typeIs(value, "function") ? value() : value;

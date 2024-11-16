@@ -1,4 +1,4 @@
-import { getKey, useHookState } from "@rbxts/topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage<TValue> {
@@ -24,9 +24,8 @@ export function useMemo(
     callback: Callback,
     dependencies: ReadonlyArray<unknown>,
     discriminator?: unknown,
-    key: unknown = getKey()
 ) {
-	const storage = useHookState(key, discriminator) as Storage<unknown>;
+	const storage = useHookState(discriminator) as Storage<unknown>;
 
 	if (storage.value === undefined || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		storage.dependencies = dependencies;

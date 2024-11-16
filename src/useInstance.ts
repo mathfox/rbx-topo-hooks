@@ -1,4 +1,4 @@
-import { getKey, useHookState } from "@rbxts/topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage {
@@ -18,9 +18,8 @@ export function useInstance<TInstance extends Instance>(
 	creator: () => TInstance,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
-    key: unknown = getKey(),
 ): TInstance {
-	const storage = useHookState(key, discriminator, cleanup) as Storage;
+	const storage = useHookState(discriminator, cleanup) as Storage;
 
 	if (!storage.instance || !structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);

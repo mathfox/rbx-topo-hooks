@@ -1,4 +1,4 @@
-import { getKey, useHookState } from "@rbxts/topo-runtime";
+import { useHookState } from "@rbxts/topo-runtime";
 import structuredDeepEquals from "./structuredDeepEquals";
 
 interface Storage<TValue> {
@@ -19,14 +19,13 @@ export function useAsync<TValue>(
 	callback: () => Promise<TValue>,
 	dependencies: ReadonlyArray<unknown>,
 	discriminator?: unknown,
-    key: unknown = getKey(),
 ): LuaTuple<
 	| [status: PromiseConstructor["Status"]["Started"], undefined]
 	| [status: PromiseConstructor["Status"]["Resolved"], value: TValue]
 	| [status: PromiseConstructor["Status"]["Rejected"], errorValue: unknown]
 	| [status: PromiseConstructor["Status"]["Cancelled"], undefined]
 > {
-	const storage = useHookState(key, discriminator, cleanup) as Storage<unknown>;
+	const storage = useHookState(discriminator, cleanup) as Storage<unknown>;
 
 	if (!structuredDeepEquals(dependencies, storage.dependencies)) {
 		cleanup(storage);

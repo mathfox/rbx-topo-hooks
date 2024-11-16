@@ -14,12 +14,12 @@ type InferSignalParameters<TValue> = TValue extends SignalLike<infer TParams> ? 
 
 declare function useEvent
     <TInstance extends Instance, TEvent extends InstanceEventNames<TInstance>>
-    (instance: TInstance, event: TEvent, key?: unknown)
+    (instance: TInstance, event: TEvent)
     : IterableFunction<LuaTuple<[index: number, ...rest: InferSignalParameters<InstanceEvents<TInstance>[TEvent]>]>>;
 
 declare function useEvent
     <TParams extends ReadonlyArray<any>, TEvent extends SignalLike<TParams>>
-    (discriminator: unknown, event: TEvent, key?: unknown)
+    (discriminator: unknown, event: TEvent)
     : IterableFunction<LuaTuple<[index: number, ...rest: InferSignalParameters<TEvent>]>>;
 
 export = useEvent;

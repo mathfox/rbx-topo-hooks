@@ -5,7 +5,6 @@
 local TS = _G[script]
 local runtime = TS.import(script, TS.getModule(script, "@rbxts", "topo-runtime").src)
 local useHookState = runtime.useHookState
-local getKey = runtime.getKey
 
 type QueueProperties<T = any> = {
 	_head: QueueEntry<T> | nil,
@@ -228,14 +227,11 @@ end
 	@param instance Instance | { [string]: CustomEvent } | CustomEvent -- The instance or the custom event, or a table that has the event you want to connect to
 	@param event string | RBXScriptSignal | CustomEvent -- The name of, or the actual event that you want to connect to
 ]=]
-local function useEvent(instance: any, event: any, key: any): () -> (number, ...any)
-    if key == nil then
-        key = getKey()
-    end
+local function useEvent(instance: any, event: any): () -> (number, ...any)
 	--assert(instance ~= nil, "Instance is nil")
 	--assert(event ~= nil, "Event is nil")
 
-	local storage = useHookState(key, instance, useEventCleanupCallback) :: UseEventStorage
+	local storage = useHookState(instance, useEventCleanupCallback) :: UseEventStorage
 
 	if storage.event ~= event then
 		if storage.event then

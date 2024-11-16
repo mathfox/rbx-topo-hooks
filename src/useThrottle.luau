@@ -5,7 +5,6 @@
 local TS = _G[script]
 local runtime = TS.import(script, TS.getModule(script, "@rbxts", "topo-runtime").src)
 local useHookState = runtime.useHookState
-local getKey = runtime.getKey
 
 local function useThrottleCleanupCallback(storage)
 	return os.clock() < storage.expiry
@@ -41,12 +40,8 @@ end
 	@param discriminator? any -- A unique value to additionally key by
 	@return boolean -- returns true every x seconds, otherwise false
 ]=]
-local function useThrottle(seconds, discriminator, key)
-    if key == nil then
-        key = getKey()
-    end
-
-	local storage = useHookState(key, discriminator, useThrottleCleanupCallback)
+local function useThrottle(seconds, discriminator)
+	local storage = useHookState(discriminator, useThrottleCleanupCallback)
 
 	if storage.time == nil or os.clock() - storage.time >= seconds then
 		storage.time = os.clock()
